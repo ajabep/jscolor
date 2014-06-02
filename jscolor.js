@@ -14,7 +14,7 @@ var jscolor = {
 
 
 	dir : '', // location of jscolor directory (leave empty to autodetect)
-	bindClass : 'color', // class name
+	bindClass : 'jscolor', // class name
 	binding : true, // automatic binding via <input class="...">
 	preloading : true, // use image preloading?
 
@@ -44,6 +44,11 @@ var jscolor = {
 
 
 	detectDir : function() {
+
+		var dir = document.getElementsByTagName('html')[0].getAttribute('data-jscolor-dir');
+		if(dir!=null)
+			return dir
+		
 		var base = location.href;
 
 		var e = document.getElementsByTagName('base');
@@ -71,11 +76,11 @@ var jscolor = {
 		var e = document.getElementsByTagName('input');
 		for(var i=0; i<e.length; i+=1) {
 			var m;
-			if(!e[i].color && e[i].className && (m = e[i].className.match(matchClass))) {
+			if(!e[i].color && ((e[i].classList && (m = e[i].classList.contains(jscolor.bindClass)))) || ( (e[i].className && (m = e[i].className.match(matchClass))) ) ) {
 				var prop = {};
 				if(m[3]) {
 					try {
-						prop = (new Function ('return (' + m[3] + ')'))();
+						prop = JSON.parse(m[3]);
 					} catch(eInvalidProp) {}
 				}
 				e[i].color = new jscolor.color(e[i], prop);
