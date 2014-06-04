@@ -5,7 +5,7 @@
  * @license GNU Lesser General Public License, http://www.gnu.org/copyleft/lesser.html
  * @author  Jan Odvarko, http://odvarko.cz
  * @created 2008-06-15
- * @updated 2013-11-25
+ * @updated 2014-06-04
  * @link    http://jscolor.com
  */
 

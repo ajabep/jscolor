@@ -1,0 +1,22 @@
+{
+	"name": "JSColor",
+	"main": "jscolor.js",
+	"version": "1.4.2",
+	"homepage": "http://jscolor.com/",
+	"authors": [
+		"Jan Odvárko"
+	],
+	"description": "Simple & user-friendly color picker for HTML forms",
+	"moduleType": [
+		"globals"
+	],
+	"license": "LGPL",
+	"private": true,
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	]
+}
