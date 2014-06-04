@@ -52,12 +52,12 @@ var jscolor = {
 		var base = location.href;
 
 		var e = document.getElementsByTagName('base');
-		for(var i=0; i<e.length; i+=1) {
+		for(var i=0; i<e.length; i++) {
 			if(e[i].href) { base = e[i].href; }
 		}
 
 		var e = document.getElementsByTagName('script');
-		for(var i=0; i<e.length; i+=1) {
+		for(var i=0; i<e.length; i++) {
 			if(e[i].src && /(^|\/)jscolor\.js([?#].*)?$/i.test(e[i].src)) {
 				var src = new jscolor.URI(e[i].src);
 				var srcAbs = src.toAbsolute(base);
@@ -74,9 +74,9 @@ var jscolor = {
 	bind : function() {
 		var matchClass = new RegExp('(^|\\s)('+jscolor.bindClass+')\\s*(\\{[^}]*\\})?', 'i');
 		var e = document.getElementsByTagName('input');
-		for(var i=0; i<e.length; i+=1) {
+		for(var i=0; i<e.length; i++) {
 			var m;
-			if(!e[i].color && ((e[i].classList && (m = e[i].classList.contains(jscolor.bindClass)))) || ( (e[i].className && (m = e[i].className.match(matchClass))) ) ) {
+			if(!e[i].color && ( (e[i].className && (m = e[i].className.match(matchClass))) || ((e[i].classList && (m = e[i].classList.contains(jscolor.bindClass)))) ) ) {
 				var prop = {};
 				if(m[3]) {
 					try {
@@ -526,9 +526,10 @@ var jscolor = {
 					);
 				} else { // 3-char notation
 					this.fromRGB(
-						parseInt(m[1].charAt(0)+m[1].charAt(0),16) / 255,
-						parseInt(m[1].charAt(1)+m[1].charAt(1),16) / 255,
-						parseInt(m[1].charAt(2)+m[1].charAt(2),16) / 255,
+						// http://jsperf.com/array-index-vs-string-charat/2
+						parseInt(m[1][0]+m[1][0],16) / 255,
+						parseInt(m[1][1]+m[1][1],16) / 255,
+						parseInt(m[1][2]+m[1][2],16) / 255,
 						flags
 					);
 				}
@@ -834,7 +835,7 @@ var jscolor = {
 			switch(modeID) {
 				case 0:
 					var rgb = HSV_RGB(THIS.hsv[0], THIS.hsv[1], 1);
-					for(var i=0; i<seg.length; i+=1) {
+					for(var i=0; i<seg.length; i++) {
 						seg[i].style.backgroundColor = 'rgb('+
 							(rgb[0]*(1-i/seg.length)*100)+'%,'+
 							(rgb[1]*(1-i/seg.length)*100)+'%,'+
@@ -854,7 +855,7 @@ var jscolor = {
 						case 4: rgb=[1,2,0]; break;
 						case 5: rgb=[0,2,1]; break;
 					}
-					for(var i=0; i<seg.length; i+=1) {
+					for(var i=0; i<seg.length; i++) {
 						s = 1 - 1/(seg.length-1)*i;
 						c[1] = c[0] * (1 - s*f);
 						c[2] = c[0] * (1 - s);
